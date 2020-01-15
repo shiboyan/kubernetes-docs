@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: minaingress
+  namespace: default
+spec:
+  rules:
+    - host: minatest.com
+    - http:
+       paths:
+         - path: /test
+           backend:
+              serviceName: minaservice
+              servicePort: 80
+

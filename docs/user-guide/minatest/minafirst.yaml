@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment-mina
+  labels:
+    app: nginx-deployment-mina
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: nginx-deployment-mina
+      labels:
+        app: nginx-deployment-mina
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.7.9
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - mountPath: /cache
+              name: mina-cache
+          ports:
+            - containerPort: 80
+      restartPolicy: Always
+      volumes:
+        - name: mina-cache
+          emptyDir:
+            {}
+  selector:
+    matchLabels:
+      app: nginx-deployment-mina
